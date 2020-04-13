@@ -1,0 +1,76 @@
+{
+  "name": "MonstroChat",
+  "author": "Ariman",
+  "version": "0.1.0",
+  "private": true,
+  "build": {
+    "appId": "MonstroChat",
+    "win": {
+      "icon": "monstro.ico"
+    },
+    "files": [
+      "assets",
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
+  "homepage": "./",
+  "main": "public/electron.js",
+  "dependencies": {
+    "@types/jest": "^24.0.25",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
+    "dotenv": "^8.2.0",
+    "electron-context-menu": "^0.16.0",
+    "firebase": "^7.7.0",
+    "html-entities": "^1.2.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-hook-form": "^4.5.3",
+    "react-image-file-resizer": "^0.2.1",
+    "react-scripts": "3.3.0",
+    "shortid": "^2.2.15",
+    "socket.io-client": "^2.3.0",
+    "styled-components": "^5.0.0-rc.3"
+  },
+  "devDependencies": {
+    "electron": "^8.0.1",
+    "electron-builder": "^22.4.1",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
+    "typescript": "^3.8.0-dev.20191224"
+  },
+  "scripts": {
+    "start": "electron .",
+    "start-1": "react-scripts start",
+    "react-build": "react-scripts build",
+    "electron-build": "electron-builder",
+    "electron-pack": "build --em.main=build/electron.js",
+    "preelectron-pack": "npm run build",
+    "build-win": "npm run react-build && electron-packager . --out=\"pack\" --overwrite",
+    "build": "npm run react-build && npm run electron-build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "electron": "electron ."
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

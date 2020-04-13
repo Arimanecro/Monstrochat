@@ -75,6 +75,12 @@ app.use([
 
   });
 
+  app.get('/upload/:avatar', (req, res) => {
+    if(req.params.avatar !== "dracula.svg") {
+      res.sendFile(`${__dirname}/upload/${req.params.avatar}`);
+    }
+  })
+
   app.post('/user',(req, res) => {
       if(req.body.filename !== "dracula.svg") {
         fs.writeFile(`${__dirname}/upload/${req.body.filename}`, req.body.file, {encoding: 'base64'}, (err) => {

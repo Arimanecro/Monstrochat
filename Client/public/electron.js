@@ -1,6 +1,5 @@
 /* eslint-disable */
 const ELECTRON_IS_DEV = process.env.ELECTRON_IS_DEV = 0;
-process.env.ELECTRON_IS_DEV = 1;
 
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron');

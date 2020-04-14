@@ -31,8 +31,7 @@ app.use([
 
       let u;
       u = newFriends[id] ? newFriends[id]['friends'] : [];
-
-      console.log(users, 'u---', u, newFriends)
+        
       io.to(socket.id).emit('checkOnlineFriends', users.concat(...u))
 
         ids.concat(...u).forEach( v => {
@@ -42,12 +41,10 @@ app.use([
         })
     
     socket.on('newfriend', (uid) => {
-      
         newFriends[uid] = {friends:[]}
         newFriends[uid]['friends'] = new Set();
         newFriends[uid]['friends'].add(id);
         ids.concat([uid]);
-        console.log('new friend added ', newFriends);
         if(onlineUsers[uid]) {
         io.to(socket.id).emit('checkOnlineFriends', users.concat([uid]));
       }
@@ -68,8 +65,6 @@ app.use([
       ids=null;
       users=[];
     });
-    
-  
     })
 
     socket.on('msg', (wsID) => {

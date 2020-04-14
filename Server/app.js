@@ -1,5 +1,4 @@
 require('dotenv').config({ path: './variables.env' });
-//const https = require('https');
 const express = require("express");
 const app = express();
 const http = require('http').createServer(app);
@@ -30,20 +29,26 @@ app.use([
          ids.includes(key) ? users.push(key) : null;
        }
 
-       io.to(socket.id).emit('checkOnlineFriends', users)
+      let u;
+      u = newFriends[id] ? newFriends[id]['friends'] : [];
 
-        ids.forEach( v => {
+      console.log(users, 'u---', u, newFriends)
+      io.to(socket.id).emit('checkOnlineFriends', users.concat(...u))
+
+        ids.concat(...u).forEach( v => {
           if(onlineUsers[v]) {
             io.to(onlineUsers[v]).emit('whoIsOnline', socketIds[socket.id]);
           }
         })
     
     socket.on('newfriend', (uid) => {
-      if(onlineUsers[uid]) {
+      
         newFriends[uid] = {friends:[]}
         newFriends[uid]['friends'] = new Set();
         newFriends[uid]['friends'].add(id);
         ids.concat([uid]);
+        console.log('new friend added ', newFriends);
+        if(onlineUsers[uid]) {
         io.to(socket.id).emit('checkOnlineFriends', users.concat([uid]));
       }
     })
@@ -62,7 +67,6 @@ app.use([
       delete newFriends[id];
       ids=null;
       users=[];
-      //socket.socket.reconnect();
     });
     
   
